@@ -20,9 +20,15 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securtityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeHttpRequests().requestMatchers("/api/v1/auth/**").permitAll().anyRequest()
-				.authenticated().and().authenticationProvider(authenticationProvider)
-				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+		
+		http
+		.csrf().disable()
+		.authorizeHttpRequests().requestMatchers("/api/v1/auth/**").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		.authenticationProvider(authenticationProvider)
+		.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+		
 		return http.build();
 	}
 
